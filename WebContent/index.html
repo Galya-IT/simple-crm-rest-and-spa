@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>All Clients</title>
+	<link rel="stylesheet" href="./view/css/general.css" media="screen" type="text/css" />
+	<script src="./view/scripts/js/lib/require.js" data-main="./view/scripts/js/app.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="clients-container"></div>
+	</div>
+
+	<script id="login-template" type="text/x-handlebars-template">
+		<div class="login-card">
+			<h1>CRM Log-in</h1>
+			<h3>user: admin, pass: qwerty</h3>
+			<form action="restapi/login" method="POST">
+				<input type="text" name="user" placeholder="Username">
+				<input type="password" name="pass" placeholder="Password">
+				<input type="submit" name="login" class="login login-submit" value="login">
+			</form>
+		</div>
+	</script>
+	
+	<script id="top-template" type="text/x-handlebars-template">
+		<div id="top">
+			<ul>
+				<li><a href="/CRM/#!/">All Clients</a></li>
+				<li><a href="/CRM/#!/clients/new">Add Client</a></li>
+				<li><a href="/CRM/#!/logout"">Logout</a></li>
+			</ul>
+		</div>
+	</script>
+
+	<script id="clients-template" type="text/x-handlebars-template">
+		{{> top}}
+		<table id="clients">
+				<caption>All Clients</caption>
+				<thead>
+					<tr>
+						<th>Logo</th>
+						<th class="sortable headerSortDown">Company Name</th>
+						<th class="sortable headerSortDown">Office Location</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each clients}}
+					<tr data-id="{{id}}">
+						<td>
+							{{#if logoFileName}}
+								<img src="/CRM/restapi/image?name={{logoFileName}}" alt="{{logoFileName}}" />
+							{{else}}
+								No logo.
+							{{/if}}
+						</td>
+
+						<td>
+							{{#if name}}
+								<a class="preview" data-id="{{id}}">{{name}}</a>
+							{{else}}
+								Error occured!
+							{{/if}}
+						</td>
+
+						<td>
+							{{#if location}}
+								{{location}}
+							{{else}}
+								No location.
+							{{/if}}
+						</td>
+
+						<td><a class="edit" data-id="{{id}}">Edit</a></td>
+						<td><a class="delete" data-id="{{id}}">Delete</a></td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+    </script>
+    
+    <script id="client-template" type="text/x-handlebars-template">
+		{{> top}}
+		<table id="clients">
+			{{#with client}}
+			<caption>Company preview - {{name}}</caption>
+			<thead>
+				<tr>
+					<th>Company Name</th>
+					<th>Office Location</th>
+					<th>Additional Notes</th>
+					<th>Date of Contract</th>
+					<th>Logo</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						{{#if name}}
+							{{name}}
+						{{else}}
+							Some error occurred. Please try again later.
+						{{/if}}
+					</td>
+					<td>
+						{{#if location}}
+							{{location}}
+						{{else}}
+							No location.
+						{{/if}}
+					</td>
+					<td>
+						{{#if notes}}
+							{{notes}}
+						{{else}}
+							No notes.
+						{{/if}}
+					</td>
+					<td>
+						{{#if contractDate}}
+							{{contractDate}}
+						{{else}}
+							No contract date.
+						{{/if}}
+					</td>
+					<td>
+						{{#if logoFileName}}
+							<img src="/CRM/restapi/image?name={{logoFileName}}" alt="{{logoFileName}}" />
+						{{else}}
+							No logo.
+						{{/if}}
+					</td>
+					<td><a class="edit" data-id="{{id}}">Edit</a></td>
+					<td><a class="delete" data-id="{{id}}">Delete</a></td>
+				</tr>
+			</tbody>
+			{{/with}}
+		</table>
+    </script>
+
+	<script id="add-edit-client-template" type="text/x-handlebars-template">
+		{{> top}}
+
+		<form enctype="multipart/form-data">
+       		<table id="clients">
+       			<caption>
+					{{#if client}}
+						Edit {{client.name}}
+					{{else}}
+						Add new client
+					{{/if}}
+       			</caption>
+       			<thead>
+       				<tr>
+       					<th>Company Name</th>
+       					<th>Office Location</th>
+       					<th>Additional Notes</th>
+       					<th>Date of Contract <br /> /dd.mm.yyyy/</th>
+       					<th>Logo</th>
+       				</tr>
+       			</thead>
+       			<tbody>
+       				<tr>
+       					<td><input class="name" class="expanded-textbox" type="text" name="name"
+       						placeholder="name" value="{{#if client.name}}{{client.name}}{{/if}}" maxlength="50" /></td>
+
+       					<td><input class="expanded-textbox" type="text"
+       						name="location" placeholder="location"
+       						value="{{#if client.location}}{{client.location}}{{/if}}" maxlength="50" /></td>
+
+       					<td><textarea class="notes-area" name="notes"
+       							placeholder="notes" maxlength="100000">{{#if client.name}}{{client.notes}}{{/if}}</textarea></td>
+
+       					<td><input class="date" type="text" name="contractDate"
+       						placeholder="contract date" value="{{#if client.contractDate}}{{client.contractDate}}{{/if}}" /></td>
+
+       					<td>
+							{{#if client.logoFileName}}
+								<img src="/CRM/restapi/image?name={{client.logoFileName}}" alt="{{client.logoFileName}}" /> <br />
+							{{/if}}
+
+						<!-- <input type="text" name="logoFileName" placeholder="Logo Name"></input> <br /> -->
+       					<input type="file" name="logoFile"></input></td>
+       				</tr>
+       			</tbody>
+       		</table>
+       		<br />
+
+			<input type="hidden" name="id" value="{{#if client.id}}{{client.id}}{{/if}}" />
+
+			{{#if client}}
+			<button type="button" id="submit" data-method="PUT">Save</button>
+			{{else}}
+			<button type="button" id="submit" data-method="POST">Save</button>
+			{{/if}}
+
+       		<button onclick="history.go(-1);">Cancel</button>
+		</form>
+	</script>
+</body>
+</html>

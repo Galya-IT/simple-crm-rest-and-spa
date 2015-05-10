@@ -1,0 +1,42 @@
+JS
+
+---------------------------------------------------------
+
+BIG BUG:
+
+Restart the server, click on "all clients" link without refreshing
+	-> non-stop requests to restapi/clients (with 401 unauthorized response)
+	-> "logout" link doesn't work also
+
+BIG FIX:
+
+00. Better JS authentication process using OAuth2 plugin for Sammy.js
+
+http://sammyjs.org/docs/api/0.6.3/
+
+---------------------------------------------------------
+
+01. Remove restapi urls from Sammy.js 404 error handling (in app.js).
+02. Add delete button for logo image.
+03. Success message for add / edit client should be shown after page redirect (some Promise required)!
+04. Add process handler to ajax request when all clients load (showing loading image while obtaining data).
+05. Show top bar always when user is logged in even if ajax returns an error!
+06. Cancel button creates an error. Better to hardcode url.
+07. All resources to be downloaded and referenced as local files (fonts, backgrounds, etc)
+08. Pagination
+09. Custom sorting (remove table sorter library)
+10. More validation for data passed to functions (may implement some objects and instance checking)
+11. Better division of view and controllers in JS (especially input validators)
+12. Better error handling
+13. More constants instead of hardcoded values.
+14. Check all TODOs.
+15. Console logs "404 Not found post /restapi/login" when successfully logging!!!
+
+SERVER
+
+01. Create an interface for HibernateQueryManager for polymorphism and transform it from static into singleton.
+02. Refactor addEditClient method somehow...
+03. Refactor FormUploadUtils.populateClientWithFormData method...
+04. Rename appropriatelly DtoJsonConvertor & ClientsDtoConvertor.
+05. Probably have to close the mysql connection somewhere :-/
+06. Check all TODOs.

@@ -1,0 +1,214 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	width: 100%;
+	text-align: center;
+	font-family: 'Verdana', 'Tahoma', 'Arial', 'sans-serif';
+}
+
+#top {
+	width: 100%;
+	line-height: 40px;
+	color: #fff;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+	background-color: #00467A;
+}
+
+#top ul {
+	margin: 0;
+	padding: 0;
+}
+	
+#top ul li{
+	display: inline-block;
+	padding-right: 10px;
+}
+
+#top ul li a:link,
+#top ul li a:visited,
+#top ul li a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+#clients {
+	margin: 20px auto 0 auto;
+	border: 2px solid #000;
+	border-radius: 5px;
+	background-color: #fff;
+}
+
+#clients caption{
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+	padding: 10px 0;
+	background-color: #fff;
+}
+
+#clients tr{
+	min-height: 350px;
+}
+
+#clients td{
+	padding: 20px;
+}
+
+#clients thead tr th{
+	background-color: #000;
+	color: #fff;
+}
+
+#clients thead tr .headerSortUp {
+	background-image: url('../img/arrow-up.png');
+}
+
+#clients thead tr .headerSortDown {
+	background-image: url('../img/arrow-down.png');
+}
+
+#clients thead tr .sortable {
+	min-width: 250px;
+	background-repeat: no-repeat;
+	background-position: center right 10px;
+	background-size: 14px auto;
+	cursor: pointer;
+}
+
+#clients tbody tr:nth-child(odd){
+	background-color: #b9c3d9;
+}
+
+#clients tbody tr:nth-child(event){
+	background-color: #fff;
+}
+
+#clients th, td{
+	margin: 0;
+	padding: 10px;
+	border: 1px solid #ccc;
+	vertical-align: top;
+	font-size: 12px;
+}
+
+#clients img {
+	max-width: 50px;
+	max-height: 50px;
+}
+
+#clients .notes-area{
+	width: 500px;
+	min-height: 150px;
+	/* TO DO: max characters - 100 000 */
+}
+
+#clients .expanded-textbox{
+	/* TO DO: word wrap, 2 rows */
+}
+
+#clients .edit,
+#clients .delete,
+#clients .preview{
+	position: relative;
+	text-decoration: underline;
+	color: blue;
+	cursor: pointer;
+}
+
+#clients input[type="text"]{
+	height: 25px;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+#clients input[type="submit"],
+#clients input[type="reset"]{
+	display: inline-block;
+	position: absolute;
+}
+
+#clients tr:nth-child(n+1) > td:nth-child(3) {
+	text-align: left;
+	max-width: 500px;
+}
+
+// ERROR MSGs
+
+.info {
+	color: #00529B;
+	background-color: #BDE5F8;
+	background-image: url('../img/info.png');
+	width: 500px;
+	height: 30px;
+	text-align: left;
+	border: 1px solid #000;
+	margin: 10px auto;
+	padding: 15px 10px 15px 70px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+.success {
+	color: #4F8A10;
+	background-color: #DFF2BF;
+	background-image:url('../img/success.png');
+	width: 500px;
+	height: 30px;
+	text-align: left;
+	border: 1px solid #000;
+	margin: 10px auto;
+	padding: 15px 10px 15px 70px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+.warning {
+	color: #9F6000;
+	background-color: #FEEFB3;
+	background-image: url('../img/warning.png');
+	width: 500px;
+	height: 30px;
+	text-align: left;
+	border: 1px solid #000;
+	margin: 10px auto;
+	padding: 15px 10px 15px 70px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+.error {
+	color: #D8000C;
+	background-color: #FFBABA;
+	background-image: url('../img/error.png');
+	width: 500px;
+	height: 30px;
+	text-align: left;
+	border: 1px solid #000;
+	margin: 10px auto;
+	padding: 15px 10px 15px 70px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+    background:rgba(255,255,255,0.5);
+}
+
+.loading img {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    left: 50%;
+    top: 35%;
+    z-index: 1000;
+}
